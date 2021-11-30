@@ -1,5 +1,8 @@
 # react-native-compass-heading
 
+## This is a mod to original `react-native-compass-heading` trying to overcome compass calibration detection challenge in some feasible way
+## Status: WIP (Work In Progress)
+
 <img src="android.png" width="40%"> <img src="ios.png" width="40%">
 
 credits - https://github.com/vnil/react-native-simple-compass
