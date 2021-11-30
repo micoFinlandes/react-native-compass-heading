@@ -41,6 +41,8 @@ public class CompassHeadingModule extends ReactContextBaseJavaModule implements 
     private float[] R = new float[9];
     private float[] I = new float[9];
 
+    private float mAccuracy = 1.0; // 0: low, 0.5: medium, 1: high.
+
     public CompassHeadingModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
@@ -165,7 +167,7 @@ public class CompassHeadingModule extends ReactContextBaseJavaModule implements 
 
                     WritableMap params = Arguments.createMap();
                     params.putDouble("heading", mAzimuth);
-                    params.putDouble("accuracy", 1.0);
+                    params.putDouble("accuracy", mAccuracy);
 
                     getReactApplicationContext()
                         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
@@ -180,6 +182,22 @@ public class CompassHeadingModule extends ReactContextBaseJavaModule implements 
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
+        switch(sensor.getType()){
+            case Sensor.TYPE_MAGNETIC_FIELD :
+                switch(accuracy) {
+                    case SensorManager.SENSOR_STATUS_ACCURACY_LOW :
+                        mAccuracy = 0.0;
+                        break;
+                    case SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM :
+                        mAccuracy = 0.5;
+                        break;
+                    case SensorManager.SENSOR_STATUS_ACCURACY_HIGH :
+                        mAccuracy = 1;
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
     }
 }
