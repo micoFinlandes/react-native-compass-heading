@@ -41,7 +41,7 @@ public class CompassHeadingModule extends ReactContextBaseJavaModule implements 
     private float[] R = new float[9];
     private float[] I = new float[9];
 
-    private float mAccuracy = 1.0f; // 0: low, 0.5: medium, 1: high.
+    private int mAccuracy = 3; // 0..3
 
     public CompassHeadingModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -184,17 +184,7 @@ public class CompassHeadingModule extends ReactContextBaseJavaModule implements 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         switch(sensor.getType()){
             case Sensor.TYPE_MAGNETIC_FIELD :
-                switch(accuracy) {
-                    case SensorManager.SENSOR_STATUS_ACCURACY_LOW :
-                        mAccuracy = 0.0f;
-                        break;
-                    case SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM :
-                        mAccuracy = 0.5f;
-                        break;
-                    case SensorManager.SENSOR_STATUS_ACCURACY_HIGH :
-                        mAccuracy = 1.0f;
-                        break;
-                }
+                mAccuracy = accuracy;
                 break;
             default:
                 break;
