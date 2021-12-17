@@ -1,7 +1,8 @@
 # react-native-compass-heading
 
-## This is a mod to original `react-native-compass-heading` trying to overcome compass calibration detection challenge in some feasible way
-## Status: WIP (Work In Progress)
+## This is a mod to original `react-native-compass-heading` to give an accuracy value for android also, which is missing in the original repo.
+
+### Accuracy is now detected by Android Java code and may alter from 0..3 where 0 is the poorest one and 3 the best one.
 
 <img src="android.png" width="40%"> <img src="ios.png" width="40%">
 
@@ -9,7 +10,7 @@ credits - https://github.com/vnil/react-native-simple-compass
 
 ## Installation
 
-`$ yarn add react-native-compass-heading`
+`$ npm install git+https://github.com/micoFinlandes/react-native-compass-heading.git`
 
 `$ cd ios/ && pod install && cd ..`
 
